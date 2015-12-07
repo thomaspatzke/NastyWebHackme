@@ -1,0 +1,16 @@
+{% extends "app.html" %}
+{% block content %}
+Got this:<br>
+<table>
+    {% for field in fields %}
+        {% if field == "q" %}
+            <tr><td>Field {{ field | upper }}:</td><td>{{ request.form[field] | safe }}</td></tr>
+        {% else %}
+            <tr><td>Field {{ field | upper }}:</td><td>{{ request.form[field] }}</td></tr>
+        {% endif %}
+    {% endfor %}
+</table>
+<a href="/ProbabilisticLogout">Back to form</a>
+{% endblock %}
+
+

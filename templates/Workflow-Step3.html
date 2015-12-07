@@ -1,0 +1,15 @@
+{% extends "app.html" %}
+{% block content %}
+<h1>Payment</h1>
+<form action="/Workflow/3" method="POST">
+    <table>
+        <tr><td>IBAN</td><td><input name="iban"></td></tr>
+        <tr><td>BIC</td><td><input name="bic"></td></tr>
+        <tr><td>Bank</td><td><input name="bank"></td></tr>
+        <tr><td>Account Owner</td><td><input name="owner"></td></tr>
+    </table>
+    <input type="hidden" name="csrftoken" value="{{ session['csrftoken'] }}">
+    <input type="submit" value="Next">
+</form>
+{% endblock %}
+

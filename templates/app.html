@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+<title>Nasty Pentestable Web App</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="header">
+    <a href="/">Home</a> 
+    {% if session['user'] %}
+        Logged in as {{ session['user'] }}. <a href="/logout">Logout</a>
+    {% else %}
+        Not logged in. <a href="/login">Login</a>
+    {% endif %}
+</div>
+<div class="content">
+    {% block content %}{% endblock %}
+</div>
+</body>
+</html>

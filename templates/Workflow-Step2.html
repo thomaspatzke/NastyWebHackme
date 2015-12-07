@@ -1,0 +1,13 @@
+{% extends "app.html" %}
+{% block content %}
+<h1>Deliver to</h1>
+<form action="/Workflow/2" method="POST">
+    <table>
+        <tr><td>Name</td><td><input name="name1"><input name="name2"></td></tr>
+        <tr><td>Street</td><td><input name="street"><input name="num"></td></tr>
+        <tr><td>Zip/City</td><td><input name="zip"><input name="city"></td></tr>
+    </table>
+    <input type="hidden" name="csrftoken" value="{{ session['csrftoken'] }}">
+    <input type="submit" value="Next">
+</form>
+{% endblock %}

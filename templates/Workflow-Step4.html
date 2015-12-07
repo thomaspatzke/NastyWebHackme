@@ -1,0 +1,13 @@
+{% extends "app.html" %}
+{% block content %}
+<h1>Check and Confirm</h1>
+<form action="/Workflow/4" method="POST">
+    <table>
+        <tr><td>Selected Article</td><td>{{ articles[session['wf_choice']] }}</td></tr>
+        <tr><td>Deliver to</td><td>{{ session['wf_name1'] }} {{ session['wf_name2'] }}, {{ session['wf_street'] | safe }} {{ session['wf_num'] }}, {{ session['wf_zip'] }} {{ session['wf_city'] }}</td></tr>
+        <tr><td>Payment Details</td><td>IBAN: {{ session['wf_iban'] }}, BIC: {{ session['wf_bic'] }}, {{ session['wf_bank'] }}, {{ session['wf_owner'] }}</td></tr>
+    </table>
+    <input type="hidden" name="csrftoken" value="{{ session['csrftoken'] }}">
+    <input type="submit" value="Confirm">
+</form>
+{% endblock %}

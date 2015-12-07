@@ -1,0 +1,13 @@
+{% extends "app.html" %}
+{% block content %}
+Select article:
+<form action="/Workflow/1" method="POST">
+    <select name="choice" size="1">
+        {% for article in articles %}
+        <option value="{{ article[0] }}">{{ article[1] }}</option>
+        {% endfor %}
+    </select>
+    <input type="hidden" name="csrftoken" value="{{ session['csrftoken'] }}">
+    <input type="submit" value="Next">
+</form>
+{% endblock %}

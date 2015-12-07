@@ -1,0 +1,14 @@
+{% extends "app.html" %}
+{% block content %}
+Please submit form:<br>
+<form action="/ProbabilisticLogout" method="POST">
+    <table>
+        {% for field in fields %}
+        <tr><td>Field {{ field | upper }}</td><td><input name="{{ field }}"></td></tr>
+        {% endfor %}
+    </table>
+    <input type="hidden" name="csrftoken" value="{{ session['csrftoken'] }}">
+    <input type="submit" value="Go">
+</form>
+{% endblock %}
+
