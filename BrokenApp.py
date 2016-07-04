@@ -1,8 +1,10 @@
 from flask import Flask, request, render_template, redirect, url_for, session
 from random import choice, random
 import string
+from ServerSideSession import VolatileServerSideSessionInterface
 
 app = Flask(__name__)
+app.session_interface = VolatileServerSideSessionInterface()
 app.secret_key = "secret"
 
 users = {
