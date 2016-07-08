@@ -1,6 +1,8 @@
-from flask import Flask, request, render_template, redirect, url_for, session
+from flask import Flask, request, render_template, redirect, url_for, session, flash
 from random import choice, random
 import string
+from uuid import uuid4
+uuid = uuid4
 
 app = Flask(__name__)
 app.secret_key = "secret"
@@ -14,6 +16,7 @@ articles = [
         (2, 'B'),
         (3, 'C')
         ]
+max_notes = 3
 
 def isLoginSession():
     return 'user' in session
@@ -115,6 +118,35 @@ def Workflow(step):
         else:
             session['step'] = 1
             return render_template("message.html", message="Thanks for your order! It will be delivered soon!")
+
+@app.route('/Notes', methods=['POST', 'GET'])
+def Notes():
+    if not isLoginSession():
+        return redirect(url_for('login', redirectto='Notes'))
+
+    if 'notes' not in session:
+        session['notes'] = dict()
+
+    if request.method == 'GET':
+        pass
+    if request.method == 'POST':
+        if request.form['action'] == 'add':
+            if len(session['notes']) >= max_notes:
+                flash("No more notes allowed!")
+            else:
+                note = { 'subject': request.form['subject'], 'content': request.form['content'] }
+                session['notes'][str(uuid())] = note
+                flash("Note was added")
+        if request.form['action'] == 'delete':
+            nid = request.form['id']
+            if nid in session['notes']:
+                subject = session['notes'][nid]['subject']
+                del session['notes'][nid]
+                flash("Note '%s' deleted" % (subject))
+            else:
+                flash("Note with id '%s' doesn\'t exists" % nid)
+
+    return render_template("notes.html", notes=session['notes'])
 
 if __name__ == '__main__':
     app.run(port=8001, debug=False)

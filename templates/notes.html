@@ -1,0 +1,37 @@
+{% extends "app.html" %}
+{% block content %}
+<h1>Notes</h1>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li>{{ message | safe }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
+<h2>Add Note</h2>
+    <form method="POST">
+        <input type="hidden" name="csrftoken" value="{{ session['csrftoken'] }}">
+        <input type="hidden" name="action" value="add">
+        <p>Subject: <input name="subject"></p>
+        Text: <textarea name="content"></textarea><br>
+        <input type="submit" value="Add">
+    </form>
+
+<h2>Your Notes</h2>
+    {% for noteid in notes %}
+        {% set note = notes[noteid] %}
+        <h3>{{ note['subject'] }}</h3>
+        <div>{{ note['content'] | safe }}</div>
+        <form method="POST">
+            <input type="hidden" name="csrftoken" value="{{ session['csrftoken'] }}">
+            <input type="hidden" name="action" value="delete">
+            <input type="hidden" name="id" value="{{ noteid }}">
+            <input type="submit" value="Delete">
+        </form>
+    {% else %}
+        <p>No notes! Add up to five.</p>
+    {% endfor %}
+{% endblock %}
