@@ -5,7 +5,6 @@ from ServerSideSession import VolatileServerSideSessionInterface
 
 app = Flask(__name__)
 app.session_interface = VolatileServerSideSessionInterface()
-app.secret_key = "secret"
 
 users = {
         'user': 'pass'
