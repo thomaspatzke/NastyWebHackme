@@ -3,9 +3,10 @@ from random import choice, random
 import string
 from uuid import uuid4
 uuid = uuid4
+from ServerSideSession import VolatileServerSideSessionInterface
 
 app = Flask(__name__)
-app.secret_key = "secret"
+app.session_interface = VolatileServerSideSessionInterface()
 
 users = {
         'user': 'pass'
