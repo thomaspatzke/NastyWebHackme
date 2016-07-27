@@ -14,3 +14,11 @@ Run
 3. Open http://localhost:8001 in your browser
 
 Credentials: user/pass
+
+Burp
+====
+
+The file BurpSessionHandling.burp-projectopts.json can be loaded as project
+options file and contains session handling rules to solve the challenges
+from the slides in Burp Session Handling.pdf.
+
