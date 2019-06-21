@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template, redirect, url_for, session, flash
+from sys import argv
 from random import choice, random
 import string
 from uuid import uuid4
@@ -150,4 +151,8 @@ def Notes():
     return render_template("notes.html", notes=session['notes'])
 
 if __name__ == '__main__':
-    app.run(port=8001, debug=False)
+    try:
+        listen_addr = argv[1]
+    except IndexError:
+        listen_addr = '127.0.0.1'
+    app.run(host=listen_addr, port=8001, debug=False)

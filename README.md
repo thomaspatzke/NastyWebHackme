@@ -1,3 +1,17 @@
+## Docker
+
+The easiest way to run the application is to use Docker. Run the following
+command line to build the container:
+
+```
+docker build -t nastywebhackme .
+```
+
+Run the app then with:
+```
+docker run -p 8001:8001 -d nastywebhackme
+```
+
 ## Install
 
 1. Install Python 3.4 + virtualenv
